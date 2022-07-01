@@ -1,5 +1,24 @@
 import React, { useState, useCallback } from 'react';
 
+function AddTodo() {
+  console.log('Rendu AddTodo');
+  const [value, setValue] = useState(0);
+
+  return (
+    <>
+      <input
+        className="m-10"
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <button className="btn btn-primary" onClick={() => setCount(count + 1)}>
+        Ajouter
+      </button>
+    </>
+  );
+}
+
 export default function App() {
   console.log('Rendu App');
   const [count, setCount] = useState(0);
@@ -12,26 +31,17 @@ export default function App() {
     [todos]
   );
 
-  const complexList = useMemo(() => complexCalculation(list), [list]);
-
   return (
     <>
-      <input
-        className="m-10"
-        type="number"
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
-      />
       <button
-        onClick={() => {
-          setList([...list, value]);
-          setValue(0);
-        }}
+        className="m-10 btn btn-primary"
+        onClick={() => setCount(count + 1)}
       >
-        Ajouter
+        +1
       </button>
+      <AddTodo addTodo={addTodo} />
       <ul>
-        {complexList.map((cl, i) => (
+        {todos.map((cl, i) => (
           <li key={i}>{cl}</li>
         ))}
       </ul>
