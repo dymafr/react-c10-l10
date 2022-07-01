@@ -1,19 +1,16 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useCallback } from 'react';
 
 export default function App() {
   console.log('Rendu App');
-  const [value, setValue] = useState(0);
-  const [list, setList] = useState([]);
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
 
-  function complexCalculation(list) {
-    console.log('Invocation');
-    return list.map((l) => {
-      for (let i = 0; i < 1000000; i++) {
-        l = i;
-      }
-      return l;
-    });
-  }
+  const addTodo = useCallback(
+    (value) => {
+      setTodos([...todos, value]);
+    },
+    [todos]
+  );
 
   const complexList = useMemo(() => complexCalculation(list), [list]);
 
