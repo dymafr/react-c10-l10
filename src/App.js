@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 
-function AddTodo() {
+const AddTodo = memo(({ addTodo }) => {
   console.log('Rendu AddTodo');
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState('');
 
   return (
     <>
@@ -12,12 +12,12 @@ function AddTodo() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <button className="btn btn-primary" onClick={() => setCount(count + 1)}>
+      <button className="btn btn-primary" onClick={() => addTodo(value)}>
         Ajouter
       </button>
     </>
   );
-}
+});
 
 export default function App() {
   console.log('Rendu App');
